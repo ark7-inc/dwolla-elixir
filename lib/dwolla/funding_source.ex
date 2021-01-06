@@ -5,30 +5,23 @@ defmodule Dwolla.FundingSource do
 
   alias Dwolla.Utils
 
-  defstruct id: nil,
-            created: nil,
-            name: nil,
-            removed: false,
-            status: nil,
-            type: nil,
-            channels: [],
-            bank_name: nil
 
-  @type t :: %__MODULE__{
-          id: String.t(),
-          created: String.t(),
-          name: String.t(),
-          removed: boolean,
-          # "verified" | "unverified"
-          status: String.t(),
-          # "bank" | "balance"
-          type: String.t(),
-          channels: [String.t()],
-          bank_name: String.t()
-        }
-  @type token :: String.t()
-  @type id :: String.t()
-  @type error :: HTTPoison.Error.t() | Dwolla.Errors.t() | tuple
+  defstruct id: nil, created: nil, name: nil, removed: false, status: nil,
+            type: nil, channels: [], bank_name: nil, bank_account_type: nil
+
+  @type t :: %__MODULE__{id: String.t,
+                         created: String.t,
+                         name: String.t,
+                         removed: boolean,
+                         status: String.t, # "verified" | "unverified"
+                         type: String.t, # "bank" | "balance"
+                         channels: [String.t],
+                         bank_name: String.t,
+                         bank_account_type: String.t
+                         }
+  @type token :: String.t
+  @type id :: String.t
+  @type error :: HTTPoison.Error.t | Dwolla.Errors.t | tuple
 
   @endpoint "funding-sources"
 
