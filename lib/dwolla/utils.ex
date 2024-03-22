@@ -267,6 +267,7 @@ defmodule Dwolla.Utils do
     |> to_snake_case()
     |> Poison.Decode.transform(%{as: %Dwolla.Document{}})
   end
+
   defp map_body(_body, :empty) do
     nil
   end
@@ -311,10 +312,10 @@ defmodule Dwolla.Utils do
   end
 
   defp get_resource_from_headers(headers) do
-    headers |> Enum.find(fn {k, _} -> k == "Location" end)
+    headers |> Enum.find(fn {k, _} -> k == "Location" or k == "location" end)
   end
 
-  defp extract_id_from_resource({"Location", resource}) do
+  defp extract_id_from_resource({_, resource}) do
     id = String.split(resource, "/") |> List.last()
     %{id: id}
   end
